@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import ExpenseForm from '../components/ExpenseForm';
+import ExpenseSummary from '../components/ExpenseSummary';
 import ExpenseList from '../components/ExpenseList';
 
 function Dashboard() {
-  // We use this key to force the ExpenseList to refresh when a new expense is added
+  // We use this key to force the components to refresh when a new expense is added
   const [refreshKey, setRefreshKey] = useState(0);
 
   const handleExpenseAdded = () => {
@@ -18,6 +19,7 @@ function Dashboard() {
       </div>
       <div className="dashboard-content">
         <ExpenseForm onExpenseAdded={handleExpenseAdded} />
+        <ExpenseSummary refreshKey={refreshKey} />
         <ExpenseList refreshKey={refreshKey} />
       </div>
     </div>
