@@ -1,4 +1,5 @@
-const API_URL = 'http://localhost:3000/expenses';
+// Use localhost when running locally, but use the relative path when deployed to Vercel
+const API_URL = import.meta.env.DEV ? 'http://localhost:3000/api/expenses' : '/api/expenses';
 
 /**
  * fetches all expenses from the backend

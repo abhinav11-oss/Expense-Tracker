@@ -1,92 +1,101 @@
-const fs = require('fs');
-const path = require('path');
+require('dotenv').config();
+const { createClient } = require('@supabase/supabase-js');
 
-const dataFilePath = path.join(__dirname, '../data.json');
+// Create a single supabase client for interacting with your database
+const supabaseUrl = process.env.SUPABASE_URL || '';
+const supabaseKey = process.env.SUPABASE_KEY || '';
+const supabase = createClient(supabaseUrl, supabaseKey);
 
-const readData = () => {
-  try {
-    const data = fs.readFileSync(dataFilePath, 'utf8');
-    return JSON.parse(data);
-  } catch (error) {
+/**
+ * Grabs all the expenses from the Supabase database
+ */
+const getExpenses = async () => {
+  const { data, error } = await supabase
+    .from('expenses')
+    .select('*')
+    .order('id', { ascending: true }); // ordering by id to keep it simple
+    
+  if (error) {
+    console.error('Error fetching expenses:', error);
     return [];
   }
-};
-
-const writeData = (data) => {
-  fs.writeFileSync(dataFilePath, JSON.stringify(data, null, 2), 'utf8');
+  return data;
 };
 
 /**
- * Gets all expenses from the file
+ * Finds a single expense by its id
+ * @param {any} id - the id from the url params
  */
-const getExpenses = () => {
-  return readData();
+const getExpenseById = async (id) => {
+  const { data, error } = await supabase
+    .from('expenses')
+    .select('*')
+    .eq('id', parseInt(id))
+    .single();
+    
+  if (error) return null;
+  return data;
 };
 
 /**
- * Finds a single expense by its ID
+ * Adds a new expense object to the database
+ * @param {Object} expenseData - the data from req.body
  */
-const getExpenseById = (id) => {
-  const expenses = readData();
-  return expenses.find(e => e.id === parseInt(id));
-};
-
-/**
- * Adds a new expense to the list and saves it
- */
-const addExpense = (expenseData) => {
-  const expenses = readData();
-  
-  // get highest id to generate a new one
-  let maxId = 0;
-  for (let i = 0; i < expenses.length; i++) {
-    if (expenses[i].id > maxId) {
-      maxId = expenses[i].id;
-    }
-  }
-  
+const addExpense = async (expenseData) => {
   const newExpense = {
-    id: maxId + 1,
     amount: expenseData.amount,
     category: expenseData.category,
     date: expenseData.date
   };
   
-  expenses.push(newExpense);
-  writeData(expenses);
+  const { data, error } = await supabase
+    .from('expenses')
+    .insert([newExpense])
+    .select() // need to select to get the auto-generated id back
+    .single();
+    
+  if (error) {
+    console.error('Error inserting expense:', error);
+    return null;
+  }
   
-  return newExpense;
+  return data;
 };
 
 /**
- * Updates an existing expense using its ID
+ * Updates an expense if it exists
+ * @param {any} id 
+ * @param {Object} expenseData 
  */
-const updateExpense = (id, expenseData) => {
-  const expenses = readData();
-  const index = expenses.findIndex(e => e.id === parseInt(id));
+const updateExpense = async (id, expenseData) => {
+  // only update fields that were provided
+  const updateData = {};
+  if (expenseData.amount) updateData.amount = expenseData.amount;
+  if (expenseData.category) updateData.category = expenseData.category;
+  if (expenseData.date) updateData.date = expenseData.date;
   
-  if (index === -1) return null;
-  
-  expenses[index].amount = expenseData.amount || expenses[index].amount;
-  expenses[index].category = expenseData.category || expenses[index].category;
-  expenses[index].date = expenseData.date || expenses[index].date;
-  
-  writeData(expenses);
-  return expenses[index];
+  const { data, error } = await supabase
+    .from('expenses')
+    .update(updateData)
+    .eq('id', parseInt(id))
+    .select()
+    .single();
+    
+  if (error) return null;
+  return data;
 };
 
 /**
- * Removes an expense from the list using its ID
+ * Deletes an expense by its id
+ * @param {any} id 
  */
-const deleteExpense = (id) => {
-  const expenses = readData();
-  const index = expenses.findIndex(e => e.id === parseInt(id));
-  
-  if (index === -1) return false;
-  
-  expenses.splice(index, 1);
-  writeData(expenses);
-  
+const deleteExpense = async (id) => {
+  const { error } = await supabase
+    .from('expenses')
+    .delete()
+    .eq('id', parseInt(id));
+    
+  if (error) return false;
   return true;
 };
 
