@@ -1,47 +1,44 @@
 .expense-summary-container {
-  background: white;
-  padding: 25px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-  margin-bottom: 30px;
-  border: 1px solid #f0f0f0;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 6px;
+  border: 1px solid #e1e4e8;
+  margin-bottom: 25px;
 }
 
 .expense-summary-container h3 {
   margin-top: 0;
-  color: #444;
-  font-weight: 700;
-  font-size: 1.3rem;
-  margin-bottom: 20px;
-  border-bottom: 2px solid #f0f0f0;
-  padding-bottom: 10px;
+  color: #2d3748;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
 }
 
 .summary-cards {
   display: flex;
-  gap: 15px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .summary-card {
-  background: #f8f9fa;
-  padding: 15px;
-  border-radius: 8px;
-  border: 1px solid #e0e0e0;
-  min-width: 120px;
-  text-align: center;
+  background: #f7fafc;
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+  min-width: 110px;
   flex: 1;
 }
 
 .summary-card h4 {
-  margin: 0 0 10px 0;
-  color: #666;
-  font-size: 0.95rem;
+  margin: 0 0 5px 0;
+  color: #718096;
+  font-size: 0.85rem;
+  text-transform: uppercase;
 }
 
 .summary-card p {
   margin: 0;
-  color: #10b981;
-  font-weight: 700;
-  font-size: 1.2rem;
+  color: #2f855a;
+  font-weight: 600;
+  font-size: 1.1rem;
 }
