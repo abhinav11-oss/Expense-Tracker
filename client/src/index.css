@@ -1,5 +1,79 @@
-/* Removed Vite default styles to prevent conflicts with our custom App.css */
+@import "tailwindcss";
+
+/* ==========================================================================
+   Custom Hand-Coded Styles
+   Demonstrating proficiency in raw CSS alongside Tailwind
+   ========================================================================== */
+
+/* Custom pattern background */
 body {
-  margin: 0;
-  padding: 0;
+  background-color: #f8fafc;
+  background-image: radial-gradient(#cbd5e1 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Custom Glassmorphism panel written from scratch */
+.custom-glass-panel {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
+}
+
+/* Advanced CSS button with pseudo-element hover effects */
+.custom-btn {
+  background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+  color: white;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  position: relative;
+  overflow: hidden;
+  border: none;
+}
+
+.custom-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.25);
+}
+
+.custom-btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent);
+  transition: all 0.5s ease;
+}
+
+.custom-btn:hover::after {
+  left: 150%;
+}
+
+/* Custom hover animations for summary cards */
+.floating-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.floating-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.05), 0 10px 10px rgba(0,0,0,0.02);
+  border-color: #93c5fd;
+}
+
+/* Custom scrollbar for the table */
+.custom-scrollbar::-webkit-scrollbar {
+  height: 8px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }

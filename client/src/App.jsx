@@ -1,9 +1,8 @@
 import Dashboard from './pages/Dashboard'
-import './App.css'
 
 function App() {
   return (
-    <div>
+    <div className="min-h-screen py-10 px-4 sm:px-6 font-sans text-slate-900 selection:bg-blue-200">
       <Dashboard />
     </div>
   )
