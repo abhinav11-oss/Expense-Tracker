@@ -1,6 +1,19 @@
 const API_URL = 'http://localhost:3000/expenses';
 
 /**
+ * fetches all expenses from the backend
+ */
+export const getExpenses = async () => {
+  const response = await fetch(API_URL);
+  
+  if (!response.ok) {
+    throw new Error('Failed to fetch expenses');
+  }
+  
+  return await response.json();
+};
+
+/**
  * sends a new expense to the backend to be saved
  * @param {Object} expenseData 
  */

@@ -4,5 +4,11 @@
     "amount": "12000",
     "category": "Travel",
     "date": "2026-08-03"
+  },
+  {
+    "id": 2,
+    "amount": "30000",
+    "category": "Bills",
+    "date": "2026-08-04"
   }
 ]

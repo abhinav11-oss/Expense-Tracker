@@ -1,11 +1,10 @@
-import ExpenseForm from './components/ExpenseForm'
+import Dashboard from './pages/Dashboard'
 import './App.css'
 
 function App() {
   return (
     <div>
-      <h1 style={{ textAlign: 'center', marginTop: '20px' }}>My Expense Tracker</h1>
-      <ExpenseForm />
+      <Dashboard />
     </div>
   )
 }

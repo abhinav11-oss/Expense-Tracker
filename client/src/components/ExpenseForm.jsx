@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { addExpense } from '../services/expenseService';
 import './ExpenseForm.css';
 
-const ExpenseForm = () => {
+const ExpenseForm = ({ onExpenseAdded }) => {
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('Food');
   const [date, setDate] = useState('');
@@ -29,6 +29,9 @@ const ExpenseForm = () => {
       setAmount('');
       setCategory('Food');
       setDate('');
+      
+      // trigger refresh in parent
+      if (onExpenseAdded) onExpenseAdded();
     } catch (error) {
       console.error(error);
       alert('Something went wrong saving the expense');
