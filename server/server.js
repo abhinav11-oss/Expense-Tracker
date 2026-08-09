@@ -1,8 +1,12 @@
 const express = require('express');
+const cors = require('cors');
 const expenseService = require('./services/expenseService');
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+// Allow the React app to talk to this API
+app.use(cors());
 
 // We need this line to read the req.body as JSON
 app.use(express.json());
@@ -29,6 +33,11 @@ app.delete('/expenses/:id', (req, res) => {
   } else {
     res.status(404).json({ error: 'Expense not found' });
   }
+});
+
+// Simple root route so the browser doesn't say "Cannot GET /"
+app.get('/', (req, res) => {
+  res.send('Expense Tracker API is running!');
 });
 
 app.listen(port, () => {
