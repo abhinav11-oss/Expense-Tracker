@@ -11,7 +11,6 @@ function Dashboard() {
   };
 
   return (
-    // Mixing Tailwind (max-w-5xl, mx-auto, rounded-2xl, etc) with custom CSS (custom-glass-panel)
     <div className="max-w-5xl mx-auto custom-glass-panel rounded-2xl overflow-hidden">
       <div className="bg-slate-900 px-6 py-10 text-center sm:px-12">
         <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">

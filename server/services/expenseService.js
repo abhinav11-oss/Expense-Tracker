@@ -13,7 +13,7 @@ const getExpenses = async () => {
   const { data, error } = await supabase
     .from('expenses')
     .select('*')
-    .order('id', { ascending: true }); // ordering by id to keep it simple
+    .order('id', { ascending: true }); 
     
   if (error) {
     console.error('Error fetching expenses:', error);
@@ -39,7 +39,7 @@ const getExpenseById = async (id) => {
 
 /**
  * Adds a new expense object to the database
- * @param {Object} expenseData - the data from req.body
+ * @param {Object} expenseData
  */
 const addExpense = async (expenseData) => {
   const newExpense = {
