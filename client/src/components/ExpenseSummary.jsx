@@ -51,22 +51,19 @@ const ExpenseSummary = ({ refreshKey }) => {
       
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
         {Object.keys(totals).map(category => (
-          <div key={category} className="floating-card bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+          <div key={category} className="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
             <div className="flex justify-between items-start mb-3">
-              <h4 className="text-sm font-semibold text-slate-500 uppercase tracking-wider">{category}</h4>
-              <span className="text-lg opacity-70">{iconMap[category] || '💰'}</span>
+              <h4 className="text-sm font-semibold text-gray-500 uppercase">{category}</h4>
+              <span className="text-lg">{iconMap[category] || '💰'}</span>
             </div>
-            <p className="text-2xl sm:text-3xl font-bold text-slate-800">
+            <p className="text-2xl font-bold text-gray-800">
               ₹{totals[category].toFixed(2)}
             </p>
           </div>
         ))}
         {Object.keys(totals).length === 0 && (
-          <div className="col-span-full flex flex-col items-center justify-center py-10 opacity-60">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-slate-400 mb-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>
-            <p className="text-sm font-medium text-slate-500 italic">No expenses logged yet. Start tracking above!</p>
+          <div className="col-span-full flex flex-col items-center justify-center py-10">
+            <p className="text-sm font-medium text-gray-500 italic">No expenses logged yet. Start tracking above!</p>
           </div>
         )}
       </div>

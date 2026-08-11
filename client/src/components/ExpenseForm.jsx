@@ -84,15 +84,11 @@ const ExpenseForm = ({ onExpenseAdded }) => {
         </div>
         
         <div className="lg:col-span-1">
-          {/* Using custom hand-coded button class alongside Tailwind spacing/typography */}
           <button 
             type="submit"
-            className="custom-btn w-full flex justify-center items-center py-3 px-6 rounded-xl text-base font-semibold"
+            className="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 px-6 rounded-lg shadow-sm"
           >
             Save Expense
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-            </svg>
           </button>
         </div>
       </form>
